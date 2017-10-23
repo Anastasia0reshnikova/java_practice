@@ -1,0 +1,6 @@
+group 'sandbox'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+mainClassName = "ru.stqa.pft.sandbox.MyFirstProgram"
