@@ -4,3 +4,5 @@
 .idea/vcs.xml
 .idea/workspace.xml
 sandbox/build/
+addressbook-web-tests/build/
+settings.gradle
