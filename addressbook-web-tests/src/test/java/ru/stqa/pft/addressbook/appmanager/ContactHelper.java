@@ -26,4 +26,20 @@ public class ContactHelper extends HelperBase{
     public void submitContactCreation() {
         click(By.name("submit"));
     }
+
+    public void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    public void deleteSelectedContact() {
+        click(By.cssSelector("[value='Delete']"));
+    }
+
+    public void modificationSelectedContact() {
+        click(By.cssSelector("[title='Edit']"));
+    }
+
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
 }

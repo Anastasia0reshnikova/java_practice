@@ -3,6 +3,8 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by a.oreshnikova on 04.11.17.
  */
@@ -17,10 +19,14 @@ public class NavigationHelper extends HelperBase{
     }
 
     public void goToNewContactPage() {
-        wd.findElement(By.linkText("add new")).click();
+        click(By.linkText("add new"));
+    }
+
+    public void goToContactPage() {
+        click(By.linkText("home"));
     }
 
     public void goToHomePage() {
-        wd.findElement(By.linkText("home page")).click();
+        click(By.linkText("home page"));
     }
 }
