@@ -11,13 +11,18 @@ public class ContactModificationTests extends TestBase{
 
     @Test
     public void testContactModification() {
-        app.getNavigationHelper().goToContactPage();
+        app.getNavigationHelper().goToHomePage();
+        if(! app.getContactHelper().isThereAContact()) {
+            app.getContactHelper().createContact(new ContactData("Аня", "Смирнова", "Яндекс",
+                    "Санкт-Петербург", "8(812)7887878", "89110110101",
+                    "test@mail.ru"));
+        }
         app.getContactHelper().selectContact();
         app.getContactHelper().modificationSelectedContact();
-        app.getContactHelper().fillContactForm(new ContactData("Татьяна", "Петрова", "Майл",
-                "Санкт-Петербург", "8(812)7887878", "89110110101",
-                "test@mail.ru"));
+        app.getContactHelper().fillContactForm(new ContactData("Татьяна", "Смирнова", "Майл",
+                "Санкт-Петербург", "8(812)7885555", "89110110155",
+                "test123@mail.ru"));
         app.getContactHelper().submitContactModification();
-        app.getNavigationHelper().goToHomePage();
+        app.getContactHelper().returnToHomePage();
     }
 }

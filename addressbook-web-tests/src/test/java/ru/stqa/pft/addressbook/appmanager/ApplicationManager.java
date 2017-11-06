@@ -36,7 +36,7 @@ public class ApplicationManager {
         } else  if (browser.equals(BrowserType.IE)) {
             wd = new InternetExplorerDriver();
         }
-        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wd.get("http://localhost:8085/addressbook/index.php");
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);

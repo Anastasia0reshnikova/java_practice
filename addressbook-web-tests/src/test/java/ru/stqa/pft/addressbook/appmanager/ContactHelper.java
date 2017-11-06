@@ -42,4 +42,27 @@ public class ContactHelper extends HelperBase{
     public void submitContactModification() {
         click(By.name("update"));
     }
+
+    private void goToNewContactPage() {
+        if(isElementPresent(By.tagName("h1"))
+                && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")) {
+            return;
+        }
+        click(By.linkText("add new"));
+    }
+
+    public void returnToHomePage() {
+        click(By.linkText("home page"));
+    }
+
+    public void createContact(ContactData contact) {
+        goToNewContactPage();
+        fillContactForm(contact);
+        submitContactCreation();
+        returnToHomePage();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
 }
