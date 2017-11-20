@@ -33,15 +33,15 @@ public class ContactHelper extends HelperBase{
     }
 
     public void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
+        wd.findElements(By.cssSelector("[title='Edit']")).get(index).click();
     }
 
     public void deleteSelectedContact() {
         click(By.cssSelector("[value='Delete']"));
     }
 
-    public void modificationSelectedContact() {
-        click(By.cssSelector("[title='Edit']"));
+    public void modificationSelectedContact(int index) {
+        wd.findElements(By.cssSelector("[title='Edit']")).get(index).click();
     }
 
     public void submitContactModification() {
