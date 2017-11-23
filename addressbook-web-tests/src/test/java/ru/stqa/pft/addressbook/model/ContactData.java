@@ -2,43 +2,17 @@ package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
 
-    private int id;
-    private final String firstname;
-    private final String lastname;
-    private final String company;
-    private final String address;
-    private final String homePhone;
-    private final String mobilePhone;
-    private final String email;
-
-    public ContactData(String firstname, String lastname, String company, String address, String homePhone, String mobilePhone, String email) {
-        this.id = Integer.MAX_VALUE;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.company = company;
-        this.address = address;
-        this.homePhone = homePhone;
-        this.mobilePhone = mobilePhone;
-        this.email = email;
-    }
-
-    public ContactData(int id, String firstname, String lastname, String company, String address, String homePhone, String mobilePhone, String email) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.company = company;
-        this.address = address;
-        this.homePhone = homePhone;
-        this.mobilePhone = mobilePhone;
-        this.email = email;
-    }
+    private int id = Integer.MAX_VALUE;
+    private String firstname;
+    private String lastname;
+    private String company;
+    private String address;
+    private String homePhone;
+    private String mobilePhone;
+    private String email;
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstname() {
@@ -67,6 +41,46 @@ public class ContactData {
 
     public String getEmail() {
         return email;
+    }
+
+    public ContactData withId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public ContactData withFirstname(String firstname) {
+        this.firstname = firstname;
+        return this;
+    }
+
+    public ContactData withLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+
+    public ContactData withCompany(String company) {
+        this.company = company;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public ContactData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    public ContactData withMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
     }
 
     @Override
