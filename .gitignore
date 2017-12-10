@@ -6,3 +6,4 @@
 sandbox/build/
 addressbook-web-tests/build/
 settings.gradle
+*.log
