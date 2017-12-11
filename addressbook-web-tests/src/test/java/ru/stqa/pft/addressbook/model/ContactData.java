@@ -122,7 +122,12 @@ public class ContactData {
         return allEmails;
     }
 
-    public File getPhoto() { return new File(photo); }
+    public File getPhoto() {
+        if (photo != null) {
+            return new File(photo);
+        }
+        return null;
+    }
 
     public ContactData withId(int id) {
         this.id = id;
@@ -197,9 +202,11 @@ public class ContactData {
     @Override
     public String toString() {
         return "ContactData{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
+                "firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
+                ", company='" + company + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 
@@ -211,13 +218,19 @@ public class ContactData {
         ContactData that = (ContactData) o;
 
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-        return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+        if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+        if (company != null ? !company.equals(that.company) : that.company != null) return false;
+        if (homePhone != null ? !homePhone.equals(that.homePhone) : that.homePhone != null) return false;
+        return email != null ? email.equals(that.email) : that.email == null;
     }
 
     @Override
     public int hashCode() {
         int result = firstname != null ? firstname.hashCode() : 0;
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (company != null ? company.hashCode() : 0);
+        result = 31 * result + (homePhone != null ? homePhone.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
 }

@@ -25,7 +25,7 @@ public class HelperBase {
     }
 
     protected void clickWithTimeOut(By locator) {
-        new WebDriverWait(wd, 20).until(ExpectedConditions.elementToBeClickable(locator));
+        new WebDriverWait(wd, 30).until(ExpectedConditions.elementToBeClickable(locator));
         wd.findElement(locator).click();
     }
 
