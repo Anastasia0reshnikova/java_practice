@@ -45,7 +45,7 @@ public class HbConnectionTest {
         session.getTransaction().commit();
         session.close();
 
-        for ( ContactData contact : result ) {
+        for (ContactData contact : result ) {
             System.out.println(contact);
             System.out.println(contact.getGroups());
         }

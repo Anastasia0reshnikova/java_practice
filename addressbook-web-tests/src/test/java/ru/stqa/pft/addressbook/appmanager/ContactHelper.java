@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class ContactHelper extends HelperBase{
         super(wd);
     }
 
-    public void fillContactForm(ContactData contactData, boolean creation) {
+    private void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
         type(By.name("company"), contactData.getCompany());
@@ -40,7 +41,7 @@ public class ContactHelper extends HelperBase{
         }
     }
 
-    public void submitContactCreation() {
+    private void submitContactCreation() {
         click(By.name("submit"));
     }
 
@@ -100,7 +101,6 @@ public class ContactHelper extends HelperBase{
         alert();
     }
 
-
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
@@ -155,4 +155,23 @@ public class ContactHelper extends HelperBase{
                 .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
                 .withEmail(email).withEmail_2(email2).withEmail_3(email3);
     }
+
+    //____________________ Работа с группами и контактами _________________
+
+    public void addToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        selectGroup(group.getName());
+        add();
+        returnToHomePage();
+        System.out.println("Контакт добавлен в группу!");
+    }
+
+    private void selectGroup(String groupName) {
+        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(groupName);
+    }
+
+    private void add() {
+        wd.findElement(By.cssSelector("[value='Add to']")).click();
+    }
+
 }
