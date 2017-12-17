@@ -6,6 +6,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -64,6 +65,21 @@ public class ContactCreationTests extends  TestBase {
         Contacts after = app.db().contacts();
         assertEquals(after.size(), before.size() + 1);
         assertThat(after, equalTo(before.withAdded(contact)));
+    }
+
+    //Предусловие - если нет группы, то нужно ее создать
+    @Test
+    public void testContactCreationWithGroup() {
+        Groups groups = app.db().groups();
+        app.goTo().homePage();
+        Contacts before = app.db().contacts();
+        ContactData newContact = new ContactData().withFirstname("Елена").withLastname("Николаевна").withCompany("ООО Привет")
+                .withHomePhone("+7(915)8009090").withEmail("privet@mail.ru").inGroup(groups.iterator().next());
+        app.contact().create(newContact);
+        app.goTo().homePage();
+        Contacts after = app.db().contacts();
+        assertEquals(after.size(), before.size() + 1);
+        assertThat(after, equalTo(before.withAdded(newContact)));
     }
 
 }
