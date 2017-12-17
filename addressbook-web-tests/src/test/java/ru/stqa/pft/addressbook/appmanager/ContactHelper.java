@@ -162,8 +162,14 @@ public class ContactHelper extends HelperBase{
         selectContactById(contact.getId());
         selectGroup(group.getName());
         add();
-        returnToHomePage();
-        System.out.println("Контакт добавлен в группу!");
+        System.out.println("Контакт добавлен в группу с именем " + group.getName());
+    }
+
+    public void removeFromGroup(ContactData contact, GroupData group) {
+        selectDeletedGroup(group.getName());
+        selectContactById(contact.getId());
+        remove();
+        System.out.println("Контакт удален из группы с именем " + group.getName());
     }
 
     private void selectGroup(String groupName) {
@@ -171,7 +177,15 @@ public class ContactHelper extends HelperBase{
     }
 
     private void add() {
-        wd.findElement(By.cssSelector("[value='Add to']")).click();
+        click(By.cssSelector("[value='Add to']"));
+    }
+
+    private void selectDeletedGroup(String groupName) {
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(groupName);
+    }
+
+    private void remove() {
+        clickWithTimeOut(By.name("remove"));
     }
 
 }
