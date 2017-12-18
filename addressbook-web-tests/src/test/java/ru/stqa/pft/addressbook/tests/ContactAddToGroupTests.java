@@ -65,6 +65,7 @@ public class ContactAddToGroupTests extends TestBase {
 
         Groups afterAdd = app.db().contacts().iterator().next().getGroups();
         assertThat(afterAdd.size(), equalTo(beforeAdd.size()));
+        assertThat(afterAdd, equalTo(beforeAdd.withAdded(group)));
     }
 
     private void createGroup(GroupData group) {
