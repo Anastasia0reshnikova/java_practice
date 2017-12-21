@@ -22,6 +22,9 @@ public class ApplicationManager {
     private WebDriver wd;
 
     private String browser;
+    private RegistrationHelper registrationHelper;
+    private FtpHelper ftpHelper;
+    private MailHelper mailHelper;
 
     public ApplicationManager(String browser){
         this.browser = browser;
@@ -31,30 +34,59 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-
-        if (browser.equals(BrowserType.FIREFOX)) {
-            System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver");
-            wd = new FirefoxDriver();
-        } else if (browser.equals(BrowserType.CHROME)) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-            wd = new ChromeDriver();
-        } else if (browser.equals(BrowserType.IE)) {
-            wd = new InternetExplorerDriver();
-        }
-        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        wd.get(properties.getProperty("web.baseUrl"));
-
     }
 
     public void stop() {
-        wd.quit();
-    }
-
-    public HttpSession newSession() {
-        return new HttpSession(this);
+        if (wd != null) {
+            wd.quit();
+        }
     }
 
     public String getProperty(String key) {
         return properties.getProperty(key);
+    }
+
+    //Помощники
+    public HttpSession newSession() {
+        return new HttpSession(this);
+    }
+
+    public RegistrationHelper registration() {
+        if (registrationHelper == null) {
+            registrationHelper = new RegistrationHelper(this);
+        }
+        return registrationHelper;
+    }
+
+    public FtpHelper ftp() {
+        if (ftpHelper == null) {
+            ftpHelper = new FtpHelper(this);
+        }
+        return ftpHelper;
+    }
+
+    public MailHelper mail() {
+        if (mailHelper == null) {
+            mailHelper = new MailHelper(this);
+        }
+        return mailHelper;
+    }
+
+    //Инициализировать драйвер
+    public WebDriver getDriver() {
+        if (wd == null) {
+            if (browser.equals(BrowserType.FIREFOX)) {
+                System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver");
+                wd = new FirefoxDriver();
+            } else if (browser.equals(BrowserType.CHROME)) {
+                System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
+                wd = new ChromeDriver();
+            } else if (browser.equals(BrowserType.IE)) {
+                wd = new InternetExplorerDriver();
+            }
+            wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            wd.get(properties.getProperty("web.baseUrl"));
+        }
+        return wd;
     }
 }
