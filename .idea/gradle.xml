@@ -3,7 +3,7 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="LOCAL" />
+        <option name="distributionType" value="WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleHome" value="/usr/local/Cellar/gradle/4.2.1/libexec" />
         <option name="gradleJvm" value="1.8" />
@@ -34,6 +34,18 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/sandbox" />
+          </set>
+        </option>
+        <option name="useAutoImport" value="true" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="createEmptyContentRootDirectories" value="true" />
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/soap-simple" />
+        <option name="gradleHome" value="/usr/local/Cellar/gradle/4.2.1/libexec" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/soap-simple" />
           </set>
         </option>
         <option name="useAutoImport" value="true" />
