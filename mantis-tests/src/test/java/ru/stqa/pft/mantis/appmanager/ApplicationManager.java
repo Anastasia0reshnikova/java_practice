@@ -26,6 +26,8 @@ public class ApplicationManager {
     private FtpHelper ftpHelper;
     private MailHelper mailHelper;
     private JamesHelper jamesHelper;
+    private AdminHelper adminHelper;
+    private UserHelper userHelper;
 
     public ApplicationManager(String browser){
         this.browser = browser;
@@ -78,6 +80,20 @@ public class ApplicationManager {
             jamesHelper = new JamesHelper(this);
         }
         return jamesHelper;
+    }
+
+    public AdminHelper admin() {
+        if (adminHelper == null) {
+            adminHelper = new AdminHelper(this);
+        }
+        return adminHelper;
+    }
+
+    public UserHelper user() {
+        if (userHelper == null) {
+            userHelper = new UserHelper(this);
+        }
+        return userHelper;
     }
 
     //Инициализировать драйвер
