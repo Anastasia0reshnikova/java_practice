@@ -16,18 +16,22 @@ dependencies {
     compile 'org.hibernate:hibernate-core:5.2.12.Final'
 }
 
+//Test Suits setting
 task testGroups(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-groups.xml'
     }
+
     if (project.hasProperty('browser')) {
-        systemProperty 'browser' "${browser}"
+        systemProperty 'browser', "${browser}"
     }
+
     if (project.hasProperty('target')) {
-        systemProperty 'target' "${target}"
+        systemProperty 'target', "${target}"
     }
-    if (project.hasProperty('verufyUI')) {
-        systemProperty 'verufyUI' "${verufyUI}"
+
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
     }
 }
 
@@ -35,12 +39,15 @@ task testContacts(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-contacts.xml'
     }
+
     if (project.hasProperty('browser')) {
         systemProperty 'browser' "${browser}"
     }
+    
     if (project.hasProperty('target')) {
         systemProperty 'target' "${target}"
     }
+
     if (project.hasProperty('verufyUI')) {
         systemProperty 'verufyUI' "${verufyUI}"
     }
