@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -14,6 +15,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+
+import static java.lang.System.getProperty;
 
 /**
  * Created by a.oreshnikova on 04.11.17.
@@ -37,7 +40,7 @@ public class ApplicationManager {
     }
 
     public void init() throws IOException {
-        String target = System.getProperty("target", "remote");
+        String target = getProperty("target", "remote");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
 
         dbHelper = new DbHelper();
@@ -55,6 +58,7 @@ public class ApplicationManager {
         } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
+            capabilities.setPlatform(Platform.fromString(getProperty("platform", "win7")));
             wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
         }
         wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
